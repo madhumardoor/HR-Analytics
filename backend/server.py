@@ -363,23 +363,23 @@ async def get_analytics():
         salary_stats = {}
         if 'monthly_income' in df.columns:
             salary_stats = {
-                'avg_salary': df['monthly_income'].mean(),
-                'median_salary': df['monthly_income'].median(),
-                'min_salary': df['monthly_income'].min(),
-                'max_salary': df['monthly_income'].max()
+                'avg_salary': float(df['monthly_income'].mean()),
+                'median_salary': float(df['monthly_income'].median()),
+                'min_salary': float(df['monthly_income'].min()),
+                'max_salary': float(df['monthly_income'].max())
             }
             
             if 'attrition' in df.columns:
-                salary_by_attrition = df.groupby('attrition')['monthly_income'].mean().to_dict()
-                salary_stats['avg_salary_by_attrition'] = salary_by_attrition
+                salary_by_attrition = df.groupby('attrition')['monthly_income'].mean()
+                salary_stats['avg_salary_by_attrition'] = {k: float(v) for k, v in salary_by_attrition.items()}
         
         # Age analysis
         age_stats = {}
         if 'age' in df.columns:
             age_stats = {
-                'avg_age': df['age'].mean(),
-                'median_age': df['age'].median(),
-                'age_range': [df['age'].min(), df['age'].max()]
+                'avg_age': float(df['age'].mean()),
+                'median_age': float(df['age'].median()),
+                'age_range': [int(df['age'].min()), int(df['age'].max())]
             }
         
         # Generate plots
