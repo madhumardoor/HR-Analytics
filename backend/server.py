@@ -393,9 +393,9 @@ async def get_analytics():
             'salary_stats': salary_stats,
             'age_stats': age_stats,
             'key_metrics': {
-                'avg_tenure': df['years_at_company'].mean() if 'years_at_company' in df.columns else None,
-                'avg_satisfaction': df['job_satisfaction'].mean() if 'job_satisfaction' in df.columns else None,
-                'overtime_percentage': (df['over_time'] == 'Yes').mean() * 100 if 'over_time' in df.columns else None
+                'avg_tenure': float(df['years_at_company'].mean()) if 'years_at_company' in df.columns else None,
+                'avg_satisfaction': float(df['job_satisfaction'].mean()) if 'job_satisfaction' in df.columns else None,
+                'overtime_percentage': float((df['over_time'] == 'Yes').mean() * 100) if 'over_time' in df.columns else None
             }
         }
         
